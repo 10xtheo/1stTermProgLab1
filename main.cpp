@@ -25,7 +25,5 @@ int main() {
   }
   cout << endl;
   // task 3
-  int inputFloat;
-  cin >> inputFloat;
 }
 
