@@ -44,5 +44,27 @@ int main() {
       cout << ' ';
   }
   cout << endl;
+  // task 4
+  union {
+  double inputDouble;
+  unsigned int arrLayer[2]; // подменяем дабл из 8-и байтов на массив из двух 4-х байтовых интов
+  }; 
+  cin >> inputDouble;
+  for (int i = 0; i < 2; ++i) { // поразрядку с маской на каждый 4-х байтовый интовый элемент
+    unsigned int mask = 1 << 31;
+    unsigned int currentBit = 0;
+    for (int j = 0; j < 32; ++j) {
+      currentBit = arrLayer[i] & mask;
+      mask = mask >> 1;
+      currentBit = currentBit >> (lengthInt - 1- j);
+      cout << currentBit;
+      if (i == 0 && j == 0)
+        cout << ' ';
+      if (i == 0 && j == 11)
+        cout << ' ';
+    }
+  }
+  cout << endl;
+  return 0;
 }
 
