@@ -25,6 +25,7 @@ int main() {
   }
   else if (choice == 2) {
   // task 2
+  int arrInt[sizeof(int)*8];
   int inputInt;
   cin >> inputInt;
   int lengthInt = sizeof(int)*8;
@@ -34,26 +35,35 @@ int main() {
     currentBit = inputInt & mask;// побитовой конъюнкцией получаем значение данного бита
     currentBit = currentBit >> (lengthInt - i - 1); // сдвигаем 100..0 до 00.01
     mask = mask >> 1; // сдвигаем маску на 1 бит вправо
-    cout << currentBit;
-    if (i == 0 || (i+1) % 8 == 0) // осуществляем отступы
+    // cout << currentBit;
+    arrInt[i] = currentBit;
+  }
+  for (int i = 0; i < lengthInt; ++i) {
+    cout << arrInt[i];
+    if (i == 0 || (i+1) % 8 == 0)
       cout << ' ';
   }
   cout << endl;
   }
-  else if (choice == 3) {// task 3
+  else if (choice == 3) {
+  // task 3
   union {
   float inputFloat;
   int interlayer;
   }; // подменяем флоат на инт
   cin >> inputFloat;
   int lengthFloat = sizeof(float)*8;
+  int arrFloat [lengthFloat];
   unsigned int mask = 1 << (lengthFloat - 1);
   unsigned int currentBit;
   for (int i = 0; i < lengthFloat; i++) {
     currentBit = interlayer & mask;
     currentBit = currentBit >> (lengthFloat - i - 1);
     mask = mask >> 1;
-    cout << currentBit;
+    arrFloat[i] = currentBit;
+  }
+  for (int i = 0; i < lengthFloat; ++i) {
+    cout << arrFloat[i];
     if (i == 0 || i == 8)
       cout << ' ';
   }
@@ -61,25 +71,37 @@ int main() {
   }
   else if (choice == 4) {
   // task 4
+  int arrDouble [64];
   union {
   double inputDouble;
   unsigned int arrLayer[2]; // подменяем дабл из 8-и байтов на массив из двух 4-х байтовых интов
   }; 
   cin >> inputDouble;
+    int lengthInt = sizeof(int)*8;
   for (int i = 1; i >= 0; --i) { // поразрядку с маской на каждый 4-х байтовый интовый элемент
     unsigned int mask = 1 << 31;
     unsigned int currentBit = 0;
-    int lengthInt = sizeof(int)*8;
     for (int j = 0; j < lengthInt; ++j) {
       currentBit = arrLayer[i] & mask;
       mask = mask >> 1;
       currentBit = currentBit >> (lengthInt - 1- j);
-      cout << currentBit;
+      if (i == 1)
+        arrDouble[j] = currentBit;
+      else
+        arrDouble[j+32] = currentBit;
+      /*cout << currentBit;
       if (i == 1 && j == 0)
         cout << ' ';
       if (i == 1 && j == 11)
-        cout << ' ';
+        cout << ' ';*/
     }
+  }
+  for (int i = 0; i < 64; ++i) {
+    cout << arrDouble[i];
+    if (i == 0)
+      cout << ' ';
+    if (i == 11)
+      cout << ' ';
   }
   cout << endl;
   }
