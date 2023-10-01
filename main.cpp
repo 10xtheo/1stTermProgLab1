@@ -28,23 +28,24 @@ int main() {
   int inputInt;
   cin >> inputInt;
   int lengthInt = sizeof(int)*8;
-  unsigned int mask = 1 << (lengthInt - 1); // маска для получения значения бита вида 100..00 где нулей 31
-  unsigned int currentBit; // значение данного бита
+  unsigned int mask = 1 << (lengthInt - 1); 
+  unsigned int currentBit; 
   for (int i = 0; i < lengthInt; i++) {
-    currentBit = inputInt & mask;// побитовой конъюнкцией получаем значение данного бита
-    currentBit = currentBit >> (lengthInt - i - 1); // сдвигаем 100..0 до 00.01
-    mask = mask >> 1; // сдвигаем маску на 1 бит вправо
+    currentBit = inputInt & mask;
+    currentBit = currentBit >> (lengthInt - i - 1); 
+    mask = mask >> 1; 
     cout << currentBit;
-    if (i == 0 || (i+1) % 8 == 0) // осуществляем отступы
+    if (i == 0 || (i+1) % 8 == 0) 
       cout << ' ';
   }
   cout << endl;
   }
-  else if (choice == 3) {// task 3
+  else if (choice == 3) {
+  // task 3
   union {
   float inputFloat;
   int interlayer;
-  }; // подменяем флоат на инт
+  }; 
   cin >> inputFloat;
   int lengthFloat = sizeof(float)*8;
   unsigned int mask = 1 << (lengthFloat - 1);
@@ -63,10 +64,9 @@ int main() {
   // task 4
   union {
   double inputDouble;
-  unsigned int arrLayer[2]; // подменяем дабл из 8-и байтов на массив из двух 4-х байтовых интов
-  }; 
+  unsigned int arrLayer[2];  }; 
   cin >> inputDouble;
-  for (int i = 1; i >= 0; --i) { // поразрядку с маской на каждый 4-х байтовый интовый элемент
+  for (int i = 1; i >= 0; --i) { 
     unsigned int mask = 1 << 31;
     unsigned int currentBit = 0;
     int lengthInt = sizeof(int)*8;
